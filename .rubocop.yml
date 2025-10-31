@@ -1,0 +1,28 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.3
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/**/*'
+
+# Specs tend to have longer blocks
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+# Allow longer lines in specs for readability
+Layout/LineLength:
+  Max: 120
+
+# Frozen string literals not critical for learning
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Allow TODO comments in tutorial code
+Style/CommentedKeyword:
+  Enabled: false
+
+# Documentation not required for tutorial
+Style/Documentation:
+  Enabled: false
