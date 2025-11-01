@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative '../lib/02_collections'
 
 RSpec.describe 'Lesson 2: Collections and Blocks' do

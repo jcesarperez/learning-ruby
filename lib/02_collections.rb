@@ -2,95 +2,120 @@
 
 # Arrays
 def create_array_of_names
-  # TODO: Return an array with ['Alice', 'Bob', 'Charlie']
+  # Return an array with ['Alice', 'Bob', 'Charlie']
+  %w[Alice Bob Charlie]
 end
 
 def get_first(array)
-  # TODO: Return first element using array[0] or array.first
+  # Return first element using array[0] or array.first
+  array[0]
 end
 
 def get_last(array)
-  # TODO: Return last element using array[-1] or array.last
+  # Return last element using array[-1] or array.last
+  array[-1]
 end
 
 def get_second_to_last(array)
-  # TODO: Return second to last using negative index
+  # Return second to last using negative index
+  array[-2]
 end
 
 def add_to_array(array, element)
-  # TODO: Add element to array using << operator and return the array
+  # Add element to array using << operator and return the array
+  array << element
 end
 
 # Hashes
 def create_user_hash(name, age)
-  # TODO: Return a hash with symbol keys: { name: name, age: age }
+  # Return a hash with symbol keys: { name: name, age: age }
+  { name: name, age: age }
 end
 
 def get_value(hash, key)
-  # TODO: Return the value for the given key
+  # Return the value for the given key
+  hash[key]
 end
 
 def merge_hashes(hash1, hash2)
-  # TODO: Merge hash2 into hash1 and return the result
+  # Merge hash2 into hash1 and return the result
   # Hint: use .merge method
+  hash1.merge(hash2)
 end
 
 # Blocks and Iterators
 def double_each_element(array)
-  # TODO: Use .each to iterate and build new array with doubled values
+  # Use .each to iterate and build new array with doubled values
   # Hint: result = []
   #       array.each { |n| result << n * 2 }
+  result = []
+  array.each { |n| result << (n * 2) }
+  result
 end
 
 def square_numbers(array)
-  # TODO: Use .map to square each number
+  # Use .map to square each number
+  array.map { |n| n * n }
 end
 
 def filter_evens(array)
-  # TODO: Use .select to keep only even numbers
+  # Use .select to keep only even numbers
+  # array.select { |n| n.even? }
+  array.select(&:even?)
 end
 
 def find_first_greater_than(array, threshold)
-  # TODO: Use .find to get first element greater than threshold
+  # Use .find to get first element greater than threshold
+  array.find { |n| n > threshold }
 end
 
 def sum_array(array)
-  # TODO: Use .reduce to sum all numbers
+  # Use .reduce to sum all numbers
   # Hint: array.reduce(0) { |sum, n| sum + n }
+  array.reduce(0) { |sum, n| sum + n }
 end
 
 # Block Syntax
 def transform_with_single_line(array)
-  # TODO: Use {} syntax to double each number
+  # Use {} syntax to double each number
   # array.map { |n| n * 2 }
+  array.map { |n| n * 2 }
 end
 
 def transform_with_multi_line(array)
-  # TODO: Use do...end syntax to triple each number
+  # Use do...end syntax to triple each number
   # array.map do |n|
   #   n * 3
   # end
+  array.map do |n|
+    n * 3
+  end
 end
 
 # Method Chaining
 def chain_operations(array)
-  # TODO: Chain .select (get evens) then .map (square them)
+  # Chain .select (get evens) then .map (square them)
   # array.select { |n| n.even? }.map { |n| n * n }
+  array.select { |n| n.even? }.map { |n| n * n }
 end
 
 def get_squared_evens(array)
-  # TODO: Filter evens, then square them
+  # Filter evens, then square them
+  array.select { |n| n.even? }.map { |n| n * n }
 end
 
 # Useful Methods
 def contains_value?(array, value)
-  # TODO: Use .include? to check if array contains value
+  # Use .include? to check if array contains value
+  array.include?(value)
 end
 
 def get_size(array)
-  # TODO: Return array size using .length or .size
+  # Return array size using .length or .size
+  array.size
 end
 
 def is_empty?(array)
-  # TODO: Use .empty? to check if array is empty
+  # Use .empty? to check if array is empty
+  array.empty?
 end
