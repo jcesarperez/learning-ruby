@@ -49,8 +49,8 @@ RSpec.describe 'Lesson 3: Classes and OOP' do
   describe 'Visibility' do
     it 'has private methods that cannot be called from outside' do
       person = Person.new('Eve', 22)
-      expect(person.public_info).to include('secret')
-      
+      expect(person.public_info).to include('This is a secret')
+
       # This should raise an error because secret_code is private
       expect { person.secret_code }.to raise_error(NoMethodError)
     end
@@ -67,15 +67,16 @@ RSpec.describe 'Lesson 3: Classes and OOP' do
     end
 
     it 'can override parent methods' do
-      employee = Employee.new('Grace', 35, 'Manager')
-      expect(employee.introduce).to include('Engineer')
+      employee = Employee.new('Grace', 35, 'Engineer')
       expect(employee.introduce).to include('Grace')
+      expect(employee.introduce).to include('Engineer')
     end
 
     it 'can call parent methods with super' do
       employee = Employee.new('Henry', 45, 'Director')
       intro = employee.introduce
       expect(intro).to include('Hi, I am Henry')
+      expect(intro).to include('45')
       expect(intro).to include('Director')
     end
   end
@@ -86,7 +87,7 @@ RSpec.describe 'Lesson 3: Classes and OOP' do
       # In Ruby: attr_reader :id
       account = BankAccount.new('ACC123', 1000)
       expect(account.id).to eq('ACC123')
-      
+
       # This should not be possible
       expect { account.id = 'NEW' }.to raise_error(NoMethodError)
     end
@@ -96,7 +97,7 @@ RSpec.describe 'Lesson 3: Classes and OOP' do
       # In Ruby: attr_writer :password
       account = BankAccount.new('ACC456', 500)
       account.password = 'secret123'
-      
+
       # Cannot read password (write-only)
       expect { account.password }.to raise_error(NoMethodError)
     end
