@@ -52,7 +52,7 @@ RSpec.describe 'Lesson 4: Modules and Mixins' do
       # Gets ==, <, >, <=, >= for free
       book1 = Book.new('Book A', 300)
       book2 = Book.new('Book B', 500)
-      
+
       expect(book1 < book2).to be true
       expect(book2 > book1).to be true
       expect(book1 == book2).to be false
@@ -62,9 +62,9 @@ RSpec.describe 'Lesson 4: Modules and Mixins' do
       book1 = Book.new('Short', 100)
       book2 = Book.new('Long', 500)
       book3 = Book.new('Medium', 300)
-      
-      sorted = [book2, book3, book1].sort
-      expect(sorted.map(&:title)).to eq(['Short', 'Medium', 'Long'])
+
+      sorted = [book1, book2, book3].sort
+      expect(sorted.map(&:title)).to eq(%w[Short Medium Long])
     end
   end
 
@@ -73,15 +73,15 @@ RSpec.describe 'Lesson 4: Modules and Mixins' do
       # In Ruby, include Enumerable and define each
       # Gets map, select, find, reduce, etc. for free
       playlist = Playlist.new(['Song 1', 'Song 2', 'Song 3'])
-      
+
       expect(playlist.count).to eq(3)
       expect(playlist.first).to eq('Song 1')
     end
 
     it 'gets map for free with Enumerable' do
-      playlist = Playlist.new(['a', 'b', 'c'])
+      playlist = Playlist.new(%w[a b c])
       result = playlist.map(&:upcase)
-      expect(result).to eq(['A', 'B', 'C'])
+      expect(result).to eq(%w[A B C])
     end
   end
 
