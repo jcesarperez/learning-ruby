@@ -6,51 +6,70 @@ end
 
 class InsufficientFundsError < StandardError
   def initialize(account_name)
-    # TODO: Call super with message "Insufficient funds for account: #{account_name}"
+    # Call super with message "Insufficient funds for account: #{account_name}"
+    super("Insufficient funds for account: #{account_name}")
   end
 end
 
 # Basic Exception Handling
 def safe_divide(a, b)
-  # TODO: Use begin/rescue to catch ZeroDivisionError
+  # Use begin/rescue to catch ZeroDivisionError
   # Return the result of a / b
   # If ZeroDivisionError occurs, return 'Cannot divide by zero'
+  a / b
+rescue ZeroDivisionError
+  'Cannot divide by zero'
 end
 
 def parse_number(string)
-  # TODO: Use begin/rescue to catch ArgumentError
+  # Use begin/rescue to catch ArgumentError
   # Use Integer(string) to parse (raises ArgumentError if invalid)
   # Return the parsed number
   # If ArgumentError occurs, return 'Not a valid number'
+  Integer(string)
+rescue ArgumentError
+  'Not a valid number'
 end
 
 # Raising Exceptions
 def validate_age(age)
-  # TODO: Raise ArgumentError with message 'Age cannot be negative' if age < 0
+  # Raise ArgumentError with message 'Age cannot be negative' if age < 0
   # Otherwise return age
+  raise ArgumentError, 'Age cannot be negative' if age.negative?
+
+  age
 end
 
 def validate_email(email)
-  # TODO: Raise InvalidEmailError if email doesn't contain '@'
+  # Raise InvalidEmailError if email doesn't contain '@'
   # Otherwise return email
   # Hint: raise InvalidEmailError unless email.include?('@')
+  raise InvalidEmailError, "#{email} doesn't contain @" unless email.include?('@')
+
+  email
 end
 
 # Ensure (like finally)
 def read_file_safely(filename)
-  # TODO: Use begin/ensure to simulate file operations
+  # Use begin/ensure to simulate file operations
   # In begin: return "Reading #{filename}"
   # In ensure: add " and file closed" to the return value
   # Hint: Use a variable to build the result
-  result = "Reading #{filename}"
   # Add ensure block that appends " and file closed"
+  result = "Reading #{filename}"
+ensure
+  result << ' and file closed'
 end
 
 # Inline rescue
 def risky_operation_safe
-  # TODO: Call risky_operation and rescue any StandardError
+  # Call risky_operation and rescue any StandardError
   # Don't use begin/end, just rescue at method level
   # Return 'Operation completed safely' if error occurs
+  # Solution: risky_operation rescue 'Operation completed safely'
+  risky_operation
+rescue StandardError
+  'Operation completed safely'
 end
 
 def risky_operation
@@ -59,8 +78,11 @@ def risky_operation
 end
 
 def get_value_with_default
-  # TODO: Use inline rescue to return 'default' if risky_call fails
-  # risky_call rescue 'default'
+  # Use inline rescue to return 'default' if risky_call fails
+  # Solution: risky_call rescue 'default'
+  risky_call
+rescue StandardError
+  'default'
 end
 
 def risky_call
@@ -88,12 +110,12 @@ def unreliable_operation
   # Hint: define a class variable or use a closure
   @attempts ||= 0
   @attempts += 1
-  
+
   # TODO: raise StandardError if @attempts == 1
   # Otherwise return 'Success after retry'
 end
 
-# Note: For a real retry example, you'd typically do:
+# NOTE: For a real retry example, you'd typically do:
 # def method_with_retry
 #   attempts = 0
 #   begin

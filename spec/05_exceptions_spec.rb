@@ -7,7 +7,7 @@ RSpec.describe 'Lesson 5: Exception Handling' do
       # In Ruby: begin ... rescue => e ... end
       result = safe_divide(10, 2)
       expect(result).to eq(5)
-      
+
       result = safe_divide(10, 0)
       expect(result).to eq('Cannot divide by zero')
     end
@@ -15,7 +15,7 @@ RSpec.describe 'Lesson 5: Exception Handling' do
     it 'can rescue specific exception types' do
       result = parse_number('123')
       expect(result).to eq(123)
-      
+
       result = parse_number('abc')
       expect(result).to eq('Not a valid number')
     end
@@ -62,13 +62,13 @@ RSpec.describe 'Lesson 5: Exception Handling' do
     it 'can rescue different exception types' do
       result = process_input('valid')
       expect(result).to eq('Processed: valid')
-      
+
       result = process_input('zero_error')
       expect(result).to include('division')
-      
+
       result = process_input('type_error')
       expect(result).to include('type')
-      
+
       result = process_input('other_error')
       expect(result).to include('unexpected')
     end
