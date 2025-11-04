@@ -55,13 +55,13 @@ def repeat_action(number_times)
 end
 
 def number_even?(number)
-  # TODO: Call .even? method directly on the number
+  # Call .even? method directly on the number
   # Yes, numbers have methods in Ruby!
   number.even?
 end
 
 def truthy?(value)
-  # TODO: Return true if value is truthy, false if falsy
+  # Return true if value is truthy, false if falsy
   # Only nil and false are falsy in Ruby
   # Hint: !!value converts to boolean
   !!value
