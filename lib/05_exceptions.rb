@@ -118,7 +118,7 @@ end
 
 # Retry
 def unreliable_operation
-  # TODO: Implement a method that uses retry
+  # Implement a method that uses retry
   # Use a counter (@@attempt_count or similar)
   # Raise an error on first attempt, succeed on second
   # Hint: define a class variable or use a closure
