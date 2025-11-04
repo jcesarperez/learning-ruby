@@ -1,6 +1,21 @@
 require_relative '../lib/05_exceptions'
 
 RSpec.describe 'Lesson 5: Exception Handling' do
+  describe 'Custom Exceptions' do
+    it 'creates custom exception classes by inheriting StandardError' do
+      # In Java: class MyException extends Exception { ... }
+      # In Ruby: class MyException < StandardError; end
+      expect(InvalidEmailError.new).to be_a(StandardError)
+      expect(InsufficientFundsError.new('test')).to be_a(StandardError)
+    end
+
+    it 'can add custom behavior to exceptions' do
+      error = InsufficientFundsError.new('Test account')
+      expect(error.message).to include('Test account')
+      expect(error.message).to include('Insufficient funds')
+    end
+  end
+
   describe 'Basic Exception Handling' do
     it 'uses begin/rescue/end instead of try/catch' do
       # In Java: try { ... } catch (Exception e) { ... }
@@ -79,21 +94,6 @@ RSpec.describe 'Lesson 5: Exception Handling' do
       # Ruby has a retry keyword to retry the begin block
       result = unreliable_operation
       expect(result).to be_a(String)
-    end
-  end
-
-  describe 'Custom Exceptions' do
-    it 'creates custom exception classes by inheriting StandardError' do
-      # In Java: class MyException extends Exception { ... }
-      # In Ruby: class MyException < StandardError; end
-      expect(InvalidEmailError.new).to be_a(StandardError)
-      expect(InsufficientFundsError.new('test')).to be_a(StandardError)
-    end
-
-    it 'can add custom behavior to exceptions' do
-      error = InsufficientFundsError.new('Test account')
-      expect(error.message).to include('Test account')
-      expect(error.message).to include('Insufficient funds')
     end
   end
 end

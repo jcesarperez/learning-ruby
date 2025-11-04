@@ -26,3 +26,7 @@ Style/CommentedKeyword:
 # Documentation not required for tutorial
 Style/Documentation:
   Enabled: false
+
+# Allow longer methods in tutorial code
+Metrics/MethodLength:
+  Max: 20

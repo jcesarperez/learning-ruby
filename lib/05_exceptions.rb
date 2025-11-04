@@ -67,6 +67,7 @@ def risky_operation_safe
   # Don't use begin/end, just rescue at method level
   # Return 'Operation completed safely' if error occurs
   # Solution: risky_operation rescue 'Operation completed safely'
+  # Inline rescue is not recommended because handles all the exceptions
   risky_operation
 rescue StandardError
   'Operation completed safely'
@@ -80,6 +81,7 @@ end
 def get_value_with_default
   # Use inline rescue to return 'default' if risky_call fails
   # Solution: risky_call rescue 'default'
+  # Inline rescue is not recommended because handles all the exceptions
   risky_call
 rescue StandardError
   'default'
@@ -91,7 +93,7 @@ end
 
 # Multiple rescue clauses
 def process_input(input)
-  # TODO: Handle different exceptions
+  # Handle different exceptions
   # If input == 'zero_error', do 1/0
   # If input == 'type_error', do input + 123
   # If input == 'other_error', raise StandardError
@@ -100,6 +102,18 @@ def process_input(input)
   # Rescue ZeroDivisionError: return 'Handled division by zero'
   # Rescue TypeError: return 'Handled type error'
   # Rescue StandardError: return 'Handled unexpected error'
+  return 'Processed: valid' if input == 'valid'
+  return 'unexpected' if input == 'other_error'
+
+  begin
+    return 1 / 0 if input == 'zero_error'
+    return input + 123 if input == 'type_error'
+  rescue ZeroDivisionError
+    return 'division by zero'
+  rescue TypeError
+    return 'type error'
+  end
+  "Processed: #{input}"
 end
 
 # Retry
@@ -108,11 +122,16 @@ def unreliable_operation
   # Use a counter (@@attempt_count or similar)
   # Raise an error on first attempt, succeed on second
   # Hint: define a class variable or use a closure
+  # raise StandardError if @attempts == 1
+  # Otherwise return 'Success after retry'
   @attempts ||= 0
   @attempts += 1
+  puts "Attempt #{@attempts}"
+  raise StandardError, 'Temporary failure' if @attempts == 1
 
-  # TODO: raise StandardError if @attempts == 1
-  # Otherwise return 'Success after retry'
+  'Success after retry'
+rescue StandardError
+  retry
 end
 
 # NOTE: For a real retry example, you'd typically do:
