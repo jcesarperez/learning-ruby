@@ -39,7 +39,7 @@ RSpec.describe 'Lesson 6: Basic Metaprogramming' do
       obj = DynamicAttributes.new
       obj.name = 'Alice'
       obj.age = 30
-      
+
       expect(obj.name).to eq('Alice')
       expect(obj.age).to eq(30)
     end
@@ -66,7 +66,7 @@ RSpec.describe 'Lesson 6: Basic Metaprogramming' do
       user = FlexibleUser.new
       user.name = 'Bob'
       user.email = 'bob@example.com'
-      
+
       expect(user.name).to eq('Bob')
       expect(user.email).to eq('bob@example.com')
       expect(user.created_fields).to include(:name, :email)
@@ -83,7 +83,7 @@ RSpec.describe 'Lesson 6: Basic Metaprogramming' do
 
     it 'can add methods to String' do
       expect('hello'.shout).to eq('HELLO!')
-      expect('world'.whisper).to eq('world...')
+      expect('WORLD'.whisper).to eq('world...')
     end
   end
 
@@ -106,7 +106,7 @@ RSpec.describe 'Lesson 6: Basic Metaprogramming' do
         set :version, '1.0.0'
         set :debug, true
       end
-      
+
       expect(config.get(:app_name)).to eq('MyApp')
       expect(config.get(:version)).to eq('1.0.0')
       expect(config.get(:debug)).to be true
