@@ -1,13 +1,28 @@
 require_relative '../lib/05_exceptions'
 
 RSpec.describe 'Lesson 5: Exception Handling' do
+  describe 'Custom Exceptions' do
+    it 'creates custom exception classes by inheriting StandardError' do
+      # In Java: class MyException extends Exception { ... }
+      # In Ruby: class MyException < StandardError; end
+      expect(InvalidEmailError.new).to be_a(StandardError)
+      expect(InsufficientFundsError.new('test')).to be_a(StandardError)
+    end
+
+    it 'can add custom behavior to exceptions' do
+      error = InsufficientFundsError.new('Test account')
+      expect(error.message).to include('Test account')
+      expect(error.message).to include('Insufficient funds')
+    end
+  end
+
   describe 'Basic Exception Handling' do
     it 'uses begin/rescue/end instead of try/catch' do
       # In Java: try { ... } catch (Exception e) { ... }
       # In Ruby: begin ... rescue => e ... end
       result = safe_divide(10, 2)
       expect(result).to eq(5)
-      
+
       result = safe_divide(10, 0)
       expect(result).to eq('Cannot divide by zero')
     end
@@ -15,7 +30,7 @@ RSpec.describe 'Lesson 5: Exception Handling' do
     it 'can rescue specific exception types' do
       result = parse_number('123')
       expect(result).to eq(123)
-      
+
       result = parse_number('abc')
       expect(result).to eq('Not a valid number')
     end
@@ -62,13 +77,13 @@ RSpec.describe 'Lesson 5: Exception Handling' do
     it 'can rescue different exception types' do
       result = process_input('valid')
       expect(result).to eq('Processed: valid')
-      
+
       result = process_input('zero_error')
       expect(result).to include('division')
-      
+
       result = process_input('type_error')
       expect(result).to include('type')
-      
+
       result = process_input('other_error')
       expect(result).to include('unexpected')
     end
@@ -79,21 +94,6 @@ RSpec.describe 'Lesson 5: Exception Handling' do
       # Ruby has a retry keyword to retry the begin block
       result = unreliable_operation
       expect(result).to be_a(String)
-    end
-  end
-
-  describe 'Custom Exceptions' do
-    it 'creates custom exception classes by inheriting StandardError' do
-      # In Java: class MyException extends Exception { ... }
-      # In Ruby: class MyException < StandardError; end
-      expect(InvalidEmailError.new).to be_a(StandardError)
-      expect(InsufficientFundsError.new('test')).to be_a(StandardError)
-    end
-
-    it 'can add custom behavior to exceptions' do
-      error = InsufficientFundsError.new('Test account')
-      expect(error.message).to include('Test account')
-      expect(error.message).to include('Insufficient funds')
     end
   end
 end
